@@ -1,0 +1,29 @@
+services:
+  # NestJS Backend
+  - name: rge-backend
+    type: web
+    region: oregon
+    buildCommand: cd nest_backend && npm install && npm run build
+    startCommand: cd nest_backend && npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: MINIMAX_API_KEY
+        sync: false
+      - key: PYTHON_SERVICE_URL
+        value: http://python-vectorizer:5001
+    healthCheckPath: /api/documents
+
+  # Python Vectorizer Service
+  - name: python-vectorizer
+    type: python
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
