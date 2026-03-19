@@ -21,9 +21,10 @@ services:
 
   # Python Vectorizer Service (using Docker)
   - name: python-vectorizer
-    type: web
+    type: docker
     region: oregon
     dockerfilePath: python_vectorizer/Dockerfile
+    dockerCommand: python app.py
     envVars:
       - key: PORT
         value: "5001"
