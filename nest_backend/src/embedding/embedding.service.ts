@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class EmbeddingService {
-  private readonly PYTHON_SERVICE_URL = 'http://localhost:5001/embed';
+  private readonly PYTHON_SERVICE_URL = process.env.PYTHON_SERVICE_URL || 'http://localhost:5001/embed';
 
   async getEmbeddings(texts: string[]): Promise<number[][]> {
     const response = await fetch(this.PYTHON_SERVICE_URL, {

@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # NestJS Backend
+  backend:
+    build:
+      context: ./nest_backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - QDRANT_URL=${QDRANT_URL:-http://qdrant:6333}
+      - QDRANT_API_KEY=${QDRANT_API_KEY:-}
+      - MINIMAX_API_KEY=${MINIMAX_API_KEY}
+      - PYTHON_SERVICE_URL=http://python-vectorizer:5001
+    depends_on:
+      - python-vectorizer
+      - qdrant
+    restart: unless-stopped
+
+  # Python Vectorizer Service
+  python-vectorizer:
+    build:
+      context: ./python_vectorizer
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    restart: unless-stopped
+
+  # Frontend (optional - can use Vercel)
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #   ports:
+  #     - "5173:80"
+  #   depends_on:
+  #     - backend
+  #   restart: unless-stopped
+
+volumes:
+  qdrant_storage:
