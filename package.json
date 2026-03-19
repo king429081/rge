@@ -1,0 +1,14 @@
+{
+  "name": "rag-express",
+  "version": "1.0.0",
+  "description": "RAG Knowledge Base with Express, Python, Qdrant, and React",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run dev",
+    "start:python": "cd python_vectorizer && pip install -r requirements.txt && python app.py",
+    "dev": "echo 'Run: npm run start:backend, npm run start:python, npm run start:frontend'"
+  }
+}
