@@ -16,15 +16,5 @@ services:
       - key: MINIMAX_API_KEY
         sync: false
       - key: PYTHON_SERVICE_URL
-        value: http://python-vectorizer:5001
+        value: https://python-vectorizer.onrender.com
     healthCheckPath: /api/documents
-
-  # Python Vectorizer Service (using Docker)
-  - name: python-vectorizer
-    type: docker
-    region: oregon
-    dockerfilePath: python_vectorizer/Dockerfile
-    dockerCommand: python app.py
-    envVars:
-      - key: PORT
-        value: "5001"
