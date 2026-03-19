@@ -3,6 +3,7 @@ services:
   - name: rge-backend
     type: web
     region: oregon
+    runtime: node
     buildCommand: cd nest_backend && npm install && npm run build
     startCommand: cd nest_backend && npm run start:prod
     envVars:
