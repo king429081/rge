@@ -10,7 +10,7 @@ exports.EmbeddingService = void 0;
 const common_1 = require("@nestjs/common");
 let EmbeddingService = class EmbeddingService {
     constructor() {
-        this.PYTHON_SERVICE_URL = 'http://localhost:5001/embed';
+        this.PYTHON_SERVICE_URL = process.env.PYTHON_SERVICE_URL || 'http://localhost:5001/embed';
     }
     async getEmbeddings(texts) {
         const response = await fetch(this.PYTHON_SERVICE_URL, {

@@ -18,7 +18,8 @@ let QdrantService = class QdrantService {
         this.CHAT_COLLECTION = 'chat_history';
         this.VECTOR_SIZE = 384;
         this.client = new js_client_rest_1.QdrantClient({
-            url: 'http://localhost:6333',
+            url: process.env.QDRANT_URL || 'http://localhost:6333',
+            apiKey: process.env.QDRANT_API_KEY,
         });
     }
     async onModuleInit() {

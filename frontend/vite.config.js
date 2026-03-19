@@ -11,5 +11,8 @@ export default defineConfig({
         changeOrigin: true
       }
     }
+  },
+  build: {
+    envPrefix: 'VITE_'
   }
 })
