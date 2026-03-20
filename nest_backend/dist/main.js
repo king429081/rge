@@ -6,7 +6,10 @@ const common_1 = require("@nestjs/common");
 const platform_ws_1 = require("@nestjs/platform-ws");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    app.enableCors();
+    app.enableCors({
+        origin: ['http://localhost:5173', 'https://rge-two.vercel.app'],
+        credentials: true,
+    });
     app.useGlobalPipes(new common_1.ValidationPipe({ transform: true }));
     app.setGlobalPrefix('api');
     app.useWebSocketAdapter(new platform_ws_1.WsAdapter(app));

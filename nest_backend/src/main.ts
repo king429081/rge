@@ -6,7 +6,10 @@ import { WsAdapter } from '@nestjs/platform-ws';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.enableCors();
+  app.enableCors({
+    origin: ['http://localhost:5173', 'https://rge-two.vercel.app'],
+    credentials: true,
+  });
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.setGlobalPrefix('api');
 
